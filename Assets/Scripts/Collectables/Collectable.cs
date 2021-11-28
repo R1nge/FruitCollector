@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 
 public abstract class Collectable : MonoBehaviour
 {
-    public abstract void PickUp();
+    protected abstract void PickUp();
 
     private void OnCollisionEnter2D(Collision2D other)
     {

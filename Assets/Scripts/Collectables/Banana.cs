@@ -10,7 +10,7 @@ public class Banana : Collectable
         _scoreHandler = FindObjectOfType<ScoreHandler>();
     }
 
-    public override void PickUp()
+    protected override void PickUp()
     {
         _scoreHandler.AddScore(point);
         Destroy(gameObject);
