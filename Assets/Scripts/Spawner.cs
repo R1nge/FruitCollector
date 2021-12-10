@@ -6,7 +6,6 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Collectable[] objectsToSpawn;
     [SerializeField] private float spawnInterval;
     [SerializeField] private int targetSpawnAmount;
-    [SerializeField] private float minX, maxX, minY, maxY;
     private Camera _camera;
     private Collectable[] _spawnedAmount;
 
