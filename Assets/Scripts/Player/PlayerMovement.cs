@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
@@ -23,5 +22,10 @@ public class PlayerMovement : MonoBehaviour
             transform.position,
             new Vector3(_touchPos.x, _touchPos.y, 0),
             Time.deltaTime * speed);
+    }
+
+    private void OnDestroy ()
+    {
+        _playerInput.OnTouchedEvent -= Move;
     }
 }
