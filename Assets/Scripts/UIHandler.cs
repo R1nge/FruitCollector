@@ -1,17 +1,18 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
-    [SerializeField] private Text scoreText, highScoreText;
-    [SerializeField] private GameObject playScreen, gameOverScreen;
+    [SerializeField] private Canvas mainMenu, inGame, gameOver;
+    [SerializeField] private TextMeshProUGUI scoreText, highScoreText;
 
     private void Start()
     {
         Time.timeScale = 0;
-        playScreen.SetActive(true);
-        gameOverScreen.SetActive(false);
+        mainMenu.gameObject.SetActive(true);
+        inGame.gameObject.SetActive(false);
+        gameOver.gameObject.SetActive(false);
     }
 
     public void UpdateScoreUI(int score, int highScore)
@@ -23,14 +24,17 @@ public class UIHandler : MonoBehaviour
     public void StartGame()
     {
         Time.timeScale = 1;
-        playScreen.SetActive(false);
+        mainMenu.gameObject.SetActive(false);
+        inGame.gameObject.SetActive(true);
+        gameOver.gameObject.SetActive(false);
     }
 
     public void GameOver()
     {
         Time.timeScale = 0;
-        gameOverScreen.SetActive(true);
-        highScoreText.enabled = true;
+        mainMenu.gameObject.SetActive(false);
+        inGame.gameObject.SetActive(false);
+        gameOver.gameObject.SetActive(true);
     }
 
     public void Restart()
