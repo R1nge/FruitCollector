@@ -1,44 +1,51 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class UIHandler : MonoBehaviour
 {
     [SerializeField] private Canvas mainMenu, inGame, gameOver;
     [SerializeField] private TextMeshProUGUI scoreText, highScoreText;
+    private GameManager _gameManager;
+    private ScoreHandler _scoreHandler;
+
+    private void Awake()
+    {
+        _gameManager = FindObjectOfType<GameManager>();
+        _gameManager.OnStartGameEvent += StartGame;
+        _gameManager.OnGameOverEvent += GameOver;
+        _scoreHandler = FindObjectOfType<ScoreHandler>();
+        _scoreHandler.OnScoreChangedEvent += UpdateScoreUI;
+    }
 
     private void Start()
     {
-        Time.timeScale = 0;
+        _gameManager.SetTimeScale(0);
         mainMenu.gameObject.SetActive(true);
         inGame.gameObject.SetActive(false);
         gameOver.gameObject.SetActive(false);
     }
 
-    public void UpdateScoreUI(int score, int highScore)
+    private void UpdateScoreUI(int score, int highScore)
     {
         scoreText.text = score.ToString();
         highScoreText.text = "HighScore: " + highScore;
     }
 
-    public void StartGame()
+    private void StartGame()
     {
-        Time.timeScale = 1;
+        _gameManager.SetTimeScale(1);
         mainMenu.gameObject.SetActive(false);
         inGame.gameObject.SetActive(true);
         gameOver.gameObject.SetActive(false);
     }
 
-    public void GameOver()
+    private void GameOver()
     {
-        Time.timeScale = 0;
+        _gameManager.SetTimeScale(0);
         mainMenu.gameObject.SetActive(false);
         inGame.gameObject.SetActive(false);
         gameOver.gameObject.SetActive(true);
     }
 
-    public void Restart()
-    {
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-    }
+    private void OnDestroy() => _scoreHandler.OnScoreChangedEvent += UpdateScoreUI;
 }

@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 412827929}
   - component: {fileID: 412827930}
   - component: {fileID: 412827927}
+  - component: {fileID: 412827931}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -201,6 +202,18 @@ MonoBehaviour:
   - {fileID: 1899068992751441535, guid: 2966e35d4616613489b51db71bddc3f2, type: 3}
   spawnInterval: 1
   targetSpawnAmount: 6
+--- !u!114 &412827931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412827926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f4e3c2263973f439f3d5a1e3013135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +800,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 980, y: 1820}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1114025876
 MonoBehaviour:
@@ -910,8 +923,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 412827929}
-        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+      - m_Target: {fileID: 412827931}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -985,7 +998,7 @@ RectTransform:
   m_GameObject: {fileID: 1409659185}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6796296, y: 0.6796296, z: 0.6796296}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1114025875}
   - {fileID: 1429785675}
@@ -995,7 +1008,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 346, y: 400.20984}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1429785674
 GameObject:
@@ -1983,8 +1996,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 412827929}
-        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+      - m_Target: {fileID: 412827931}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
         m_Arguments:

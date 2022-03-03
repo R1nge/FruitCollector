@@ -1,20 +1,15 @@
+using System;
 using UnityEngine;
 
 public class ScoreHandler : MonoBehaviour
 {
     private int _score, _highScore;
-    private UIHandler _uiHandler;
 
-    private void Awake()
-    {
-        _uiHandler = GetComponent<UIHandler>();
-        _highScore = PlayerPrefs.GetInt("HighScore");
-    }
+    public event Action<int, int> OnScoreChangedEvent;
 
-    private void Start()
-    {
-        _uiHandler.UpdateScoreUI(_score, _highScore);
-    }
+    private void Awake() => _highScore = PlayerPrefs.GetInt("HighScore");
+
+    private void Start() => OnScoreChangedEvent?.Invoke(_score, _highScore);
 
     public void AddScore(int amount)
     {
@@ -26,6 +21,6 @@ public class ScoreHandler : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        _uiHandler.UpdateScoreUI(_score, _highScore);
+        OnScoreChangedEvent?.Invoke(_score, _highScore);
     }
 }

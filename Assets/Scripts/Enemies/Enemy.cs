@@ -1,14 +1,18 @@
+using Player;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+namespace Enemies
 {
-    public float damage;
-
-    private void OnCollisionEnter2D(Collision2D other)
+    public abstract class Enemy : MonoBehaviour
     {
-        if (other.transform.TryGetComponent(out PlayerHealth health))
+        public float damage;
+
+        private void OnCollisionEnter2D(Collision2D other)
         {
-            health.TakeDamage(damage);
+            if (other.transform.TryGetComponent(out PlayerHealth health))
+            {
+                health.TakeDamage(damage);
+            }
         }
     }
 }

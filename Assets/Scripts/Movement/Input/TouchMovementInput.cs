@@ -1,22 +1,17 @@
 using UnityEngine;
 
-namespace Player
+namespace MovementInput
 {
     public class TouchMovementInput : MonoBehaviour, IMovementInputGetter
     {
-        private Camera _camera;
         public float Horizontal { get; private set; }
         public float Vertical { get; private set; }
+        
+        private Camera _camera;
 
-        private void Awake()
-        {
-            _camera = FindObjectOfType<Camera>();
-        }
+        private void Awake() => _camera = FindObjectOfType<Camera>();
 
-        private void Update()
-        {
-            GetInput();
-        }
+        private void Update() => GetInput();
 
         private void GetInput()
         {

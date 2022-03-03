@@ -1,5 +1,8 @@
-public interface IMovementInputGetter
+namespace MovementInput
 {
-    float Horizontal { get; }
-    float Vertical { get; }
+    public interface IMovementInputGetter
+    {
+        float Horizontal { get; }
+        float Vertical { get; }
+    }
 }

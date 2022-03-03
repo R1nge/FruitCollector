@@ -1,3 +1,6 @@
-public class Zombie : Enemy
+namespace Enemies
 {
+    public class Zombie : Enemy
+    {
+    }
 }

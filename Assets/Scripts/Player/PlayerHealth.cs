@@ -1,22 +1,22 @@
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+namespace Player
 {
-	[SerializeField] private float health;
-	private UIHandler _uiHandler;
+    public class PlayerHealth : MonoBehaviour
+    {
+        [SerializeField] private float health;
+        private GameManager _gameManager;
 
-	private void Awake ()
-	{
-		_uiHandler = FindObjectOfType<UIHandler>();
-	}
+        private void Awake() => _gameManager = FindObjectOfType<GameManager>();
 
-	public void TakeDamage (float amount)
-	{
-		health -= amount;
-		if (health <= 0)
-		{
-			_uiHandler.GameOver();
-			Destroy(gameObject);
-		}
-	}
+        public void TakeDamage(float amount)
+        {
+            health -= amount;
+            if (health <= 0)
+            {
+                _gameManager.GameOver();
+                Destroy(gameObject);
+            }
+        }
+    }
 }

@@ -1,20 +1,21 @@
+using MovementInput;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+namespace Movement
 {
-    [SerializeField] private float speed;
-    private IMovementInputGetter movementInputGetter;
-
-    private void Awake()
+    public class Movement : MonoBehaviour
     {
-        movementInputGetter = GetComponent<IMovementInputGetter>();
-    }
+        [SerializeField] private float speed;
+        private IMovementInputGetter _movementInputGetter;
 
-    private void Update()
-    {
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            new Vector3(movementInputGetter.Horizontal, movementInputGetter.Vertical, 0),
-            Time.deltaTime * speed);
+        private void Awake() => _movementInputGetter = GetComponent<IMovementInputGetter>();
+
+        private void Update()
+        {
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                new Vector3(_movementInputGetter.Horizontal, _movementInputGetter.Vertical, 0),
+                Time.deltaTime * speed);
+        }
     }
 }
