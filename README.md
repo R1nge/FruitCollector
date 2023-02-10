@@ -1,7 +1,3 @@
 # FruitCollector
-![image](https://user-images.githubusercontent.com/59400159/154425810-0c37d0b0-689a-44a1-b5d8-dcd866b86617.png)
 
-![image](https://user-images.githubusercontent.com/59400159/154425859-67a01d05-68d4-4627-8601-3d764747c33c.png)
-
-![image](https://user-images.githubusercontent.com/59400159/154425915-a6fa7b07-0c89-4130-87ed-970e3dc61888.png)
-
+https://user-images.githubusercontent.com/59400159/218067269-3c838837-651a-43d0-841a-bff9fee1a057.mp4
