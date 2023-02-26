@@ -15,6 +15,7 @@ public class UIHandler : MonoBehaviour
         _gameManager.OnGameOverEvent += GameOver;
         _scoreHandler = FindObjectOfType<ScoreHandler>();
         _scoreHandler.OnScoreChangedEvent += UpdateScoreUI;
+        _scoreHandler.OnHighScoreChangedEvent += UpdateHighScoreUI;
     }
 
     private void Start()
@@ -25,11 +26,9 @@ public class UIHandler : MonoBehaviour
         gameOver.gameObject.SetActive(false);
     }
 
-    private void UpdateScoreUI(int score, int highScore)
-    {
-        scoreText.text = score.ToString();
-        highScoreText.text = "HighScore: " + highScore;
-    }
+    private void UpdateScoreUI(int score) => scoreText.text = score.ToString();
+
+    private void UpdateHighScoreUI(int highScore) => highScoreText.text = $"HighScore: {highScore}";
 
     private void StartGame()
     {
@@ -47,5 +46,9 @@ public class UIHandler : MonoBehaviour
         gameOver.gameObject.SetActive(true);
     }
 
-    private void OnDestroy() => _scoreHandler.OnScoreChangedEvent += UpdateScoreUI;
+    private void OnDestroy()
+    {
+        _scoreHandler.OnScoreChangedEvent -= UpdateScoreUI;
+        _scoreHandler.OnHighScoreChangedEvent -= UpdateHighScoreUI;
+    }
 }

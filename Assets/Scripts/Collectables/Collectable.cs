@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public abstract class Collectable : MonoBehaviour
+namespace Collectables
 {
-    protected abstract void PickUp();
-
-    private void OnCollisionEnter2D(Collision2D other)
+    public abstract class Collectable : MonoBehaviour
     {
-        if (other.transform.CompareTag("Player"))
+        protected abstract void PickUp();
+
+        private void OnCollisionEnter2D(Collision2D other)
         {
-            PickUp();
+            if (other.transform.CompareTag("Player"))
+            {
+                PickUp();
+            }
         }
     }
 }

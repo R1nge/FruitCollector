@@ -1,4 +1,5 @@
 using System.Collections;
+using Collectables;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
