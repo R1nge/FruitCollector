@@ -1,35 +1,37 @@
-using System.Collections;
 using Collectables;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private Collectable[] objectsToSpawn;
-    [SerializeField] private float spawnInterval;
     [SerializeField] private int targetSpawnAmount;
     private Camera _camera;
     private int _spawnedAmount;
 
     private void Awake() => _camera = FindObjectOfType<Camera>();
 
-    private void Start() => StartCoroutine(Spawn_c());
-
-    private IEnumerator Spawn_c()
+    private void Start()
     {
-        while (enabled)
+        for (int i = 0; i < targetSpawnAmount; i++)
         {
-            _spawnedAmount = FindObjectsOfType<Collectable>().Length;
-            if (_spawnedAmount < targetSpawnAmount)
-            {
-                Instantiate(objectsToSpawn[Random.Range(0, objectsToSpawn.Length)],
-                    _camera.ViewportToWorldPoint(
-                        new Vector3(
-                            Random.Range(0f, 1f),
-                            Random.Range(0f, 1f)) + new Vector3(0, 0, 10)),
-                    Quaternion.identity);
-            }
-
-            yield return new WaitForSeconds(spawnInterval);
+            Spawn();
         }
+    }
+
+    private void Spawn()
+    {
+        var instance = Instantiate(objectsToSpawn[Random.Range(0, objectsToSpawn.Length)],
+            _camera.ViewportToWorldPoint(
+                new Vector3(
+                    Random.Range(0f, 1f),
+                    Random.Range(0f, 1f)) + new Vector3(0, 0, 10)),
+            Quaternion.identity);
+        instance.OnPickedUpEvent += OnPickedUp;
+    }
+
+    private void OnPickedUp(Collectable collectable)
+    {
+        Spawn();
+        collectable.OnPickedUpEvent -= OnPickedUp;
     }
 }

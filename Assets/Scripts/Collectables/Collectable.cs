@@ -1,10 +1,13 @@
+using System;
 using UnityEngine;
 
 namespace Collectables
 {
     public abstract class Collectable : MonoBehaviour
     {
-        protected abstract void PickUp();
+        public event Action<Collectable> OnPickedUpEvent;
+
+        protected virtual void PickUp() => OnPickedUpEvent?.Invoke(this);
 
         private void OnCollisionEnter2D(Collision2D other)
         {

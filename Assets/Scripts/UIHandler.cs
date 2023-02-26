@@ -48,6 +48,8 @@ public class UIHandler : MonoBehaviour
 
     private void OnDestroy()
     {
+        _gameManager.OnStartGameEvent -= StartGame;
+        _gameManager.OnGameOverEvent -= GameOver;
         _scoreHandler.OnScoreChangedEvent -= UpdateScoreUI;
         _scoreHandler.OnHighScoreChangedEvent -= UpdateHighScoreUI;
     }

@@ -11,6 +11,7 @@ namespace Collectables
 
         protected override void PickUp()
         {
+            base.PickUp();
             _scoreHandler.AddScore(point);
             Destroy(gameObject);
         }
