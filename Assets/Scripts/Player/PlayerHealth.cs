@@ -1,4 +1,5 @@
 using UnityEngine;
+using VContainer;
 
 namespace Player
 {
@@ -7,7 +8,11 @@ namespace Player
         [SerializeField] private float health;
         private GameManager _gameManager;
 
-        private void Awake() => _gameManager = FindObjectOfType<GameManager>();
+        [Inject]
+        private void Construct(GameManager gameManager)
+        {
+            _gameManager = gameManager;
+        }
 
         public void TakeDamage(float amount)
         {

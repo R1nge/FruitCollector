@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using VContainer;
 
 public class UIHandler : MonoBehaviour
 {
@@ -8,12 +9,17 @@ public class UIHandler : MonoBehaviour
     private GameManager _gameManager;
     private ScoreHandler _scoreHandler;
 
+    [Inject]
+    private void Construct(GameManager gameManager, ScoreHandler scoreHandler)
+    {
+        _gameManager = gameManager;
+        _scoreHandler = scoreHandler;
+    }
+
     private void Awake()
     {
-        _gameManager = FindObjectOfType<GameManager>();
-        _gameManager.OnStartGameEvent += StartGame;
-        _gameManager.OnGameOverEvent += GameOver;
-        _scoreHandler = FindObjectOfType<ScoreHandler>();
+        _gameManager.OnStartGameEvent += OnGameStarted;
+        _gameManager.OnGameOverEvent += OnGameOver;
         _scoreHandler.OnScoreChangedEvent += UpdateScoreUI;
         _scoreHandler.OnHighScoreChangedEvent += UpdateHighScoreUI;
     }
@@ -26,11 +32,15 @@ public class UIHandler : MonoBehaviour
         gameOver.gameObject.SetActive(false);
     }
 
+    public void StartGame() => _gameManager.StartGame();
+
+    public void RestartGame() => _gameManager.Restart();
+
     private void UpdateScoreUI(int score) => scoreText.text = score.ToString();
 
     private void UpdateHighScoreUI(int highScore) => highScoreText.text = $"HighScore: {highScore}";
 
-    private void StartGame()
+    private void OnGameStarted()
     {
         _gameManager.SetTimeScale(1);
         mainMenu.gameObject.SetActive(false);
@@ -38,7 +48,7 @@ public class UIHandler : MonoBehaviour
         gameOver.gameObject.SetActive(false);
     }
 
-    private void GameOver()
+    private void OnGameOver()
     {
         _gameManager.SetTimeScale(0);
         mainMenu.gameObject.SetActive(false);
@@ -49,7 +59,7 @@ public class UIHandler : MonoBehaviour
     private void OnDestroy()
     {
         _gameManager.OnStartGameEvent -= StartGame;
-        _gameManager.OnGameOverEvent -= GameOver;
+        _gameManager.OnGameOverEvent -= OnGameOver;
         _scoreHandler.OnScoreChangedEvent -= UpdateScoreUI;
         _scoreHandler.OnHighScoreChangedEvent -= UpdateHighScoreUI;
     }

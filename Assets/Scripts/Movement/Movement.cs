@@ -14,7 +14,7 @@ namespace Movement
         {
             transform.position = Vector3.MoveTowards(
                 transform.position,
-                new Vector3(_movementInputGetter.Horizontal, _movementInputGetter.Vertical, 0),
+                new(_movementInputGetter.Horizontal, _movementInputGetter.Vertical, 0),
                 Time.deltaTime * speed);
         }
     }

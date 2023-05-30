@@ -1,4 +1,5 @@
 using UnityEngine;
+using VContainer;
 
 namespace Collectables
 {
@@ -6,8 +7,12 @@ namespace Collectables
     {
         [SerializeField] private int point;
         private ScoreHandler _scoreHandler;
-
-        private void Awake() => _scoreHandler = FindObjectOfType<ScoreHandler>();
+        
+        [Inject]
+        private void Construct(ScoreHandler scoreHandler)
+        {
+            _scoreHandler = scoreHandler;
+        }
 
         protected override void PickUp()
         {
