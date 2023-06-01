@@ -168,11 +168,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b2e1589e2c84ff48a30db3e08fa0ae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenu: {fileID: 868381075}
-  inGame: {fileID: 1587290455}
-  gameOver: {fileID: 852392998}
-  scoreText: {fileID: 1026681996}
-  highScoreText: {fileID: 1429785676}
+  uiModel:
+    mainMenu: {fileID: 868381075}
+    inGame: {fileID: 1587290455}
+    gameOver: {fileID: 852392998}
+    scoreText: {fileID: 1026681996}
+    highScoreText: {fileID: 1429785676}
 --- !u!114 &412827930
 MonoBehaviour:
   m_ObjectHideFlags: 0

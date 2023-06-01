@@ -1,11 +1,10 @@
-using TMPro;
 using UnityEngine;
 using VContainer;
 
-public class UIHandler : MonoBehaviour
+public class UIController : MonoBehaviour
 {
-    [SerializeField] private Canvas mainMenu, inGame, gameOver;
-    [SerializeField] private TextMeshProUGUI scoreText, highScoreText;
+    [SerializeField] private UIModel uiModel;
+    private UIView _view;
     private GameManager _gameManager;
     private ScoreHandler _scoreHandler;
 
@@ -22,38 +21,36 @@ public class UIHandler : MonoBehaviour
         _gameManager.OnGameOverEvent += OnGameOver;
         _scoreHandler.OnScoreChangedEvent += UpdateScoreUI;
         _scoreHandler.OnHighScoreChangedEvent += UpdateHighScoreUI;
+        _view = new(uiModel.mainMenu, uiModel.inGame, uiModel.gameOver, uiModel.scoreText, uiModel.highScoreText);
     }
 
     private void Start()
     {
+        _view.OnGameLoaded();
         _gameManager.SetTimeScale(0);
-        mainMenu.gameObject.SetActive(true);
-        inGame.gameObject.SetActive(false);
-        gameOver.gameObject.SetActive(false);
     }
 
     public void StartGame() => _gameManager.StartGame();
 
     public void RestartGame() => _gameManager.Restart();
 
-    private void UpdateScoreUI(int score) => scoreText.text = score.ToString();
+    private void UpdateScoreUI(int score) => _view.UpdateScore(ref score);
 
-    private void UpdateHighScoreUI(int highScore) => highScoreText.text = $"HighScore: {highScore}";
+    private void UpdateHighScoreUI(int highScore)
+    {
+        _view.UpdateHighScore(ref highScore);
+    }
 
     private void OnGameStarted()
     {
+        _view.OnGameStarted();
         _gameManager.SetTimeScale(1);
-        mainMenu.gameObject.SetActive(false);
-        inGame.gameObject.SetActive(true);
-        gameOver.gameObject.SetActive(false);
     }
 
     private void OnGameOver()
     {
         _gameManager.SetTimeScale(0);
-        mainMenu.gameObject.SetActive(false);
-        inGame.gameObject.SetActive(false);
-        gameOver.gameObject.SetActive(true);
+        _view.OnGameOver();
     }
 
     private void OnDestroy()
